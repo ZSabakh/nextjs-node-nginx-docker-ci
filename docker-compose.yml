@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  nodejs:
+    build:
+      context: ./node
+    container_name: nodejs_server
+    hostname: nodejsserver
+    ports:
+      - "3000:3000"
+    networks:
+      - mern-net
+    volumes:
+      - ./uploads:/usr/src/node_app/public
+
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    hostname: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - nodejs
+    networks:
+      - mern-net
+
+networks:
+  mern-net:
+    external: true
