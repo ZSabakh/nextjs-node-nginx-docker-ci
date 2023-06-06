@@ -2,6 +2,7 @@ version: "3"
 
 services:
   nodejs:
+    image: ${NODEJS_IMG}
     build:
       context: ./node
     container_name: nodejs_server
@@ -12,8 +13,11 @@ services:
       - mern-net
     volumes:
       - ./uploads:/usr/src/node_app/public
+    env_file:
+      - .env
 
   nginx:
+    image: ${NGINX_IMG}
     build:
       context: ./nginx
     container_name: nginx
@@ -24,6 +28,8 @@ services:
       - nodejs
     networks:
       - mern-net
+    env_file:
+      - .env
 
 networks:
   mern-net:

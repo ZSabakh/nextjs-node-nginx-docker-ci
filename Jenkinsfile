@@ -13,8 +13,12 @@ pipeline {
         stage('Build Nginx Dockerfile') {
             steps {
                 echo 'Building Nginx Dockerfile...'
+                script {
+                    def timestamp = new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone('UTC'))
+                    env.IMAGE_TAG_NGINX = "my-nginx-image:${timestamp}"
+                }
                 dir('nginx') {
-                    sh 'docker build -t my-nginx-image .'
+                    sh "docker build -t ${env.IMAGE_TAG_NGINX} ."
                 }
             }
         }
@@ -22,9 +26,22 @@ pipeline {
         stage('Build Nodejs Dockerfile') {
             steps {
                 echo 'Building Nodejs Dockerfile...'
-                dir('node') {
-                    sh 'docker build -t my-nodejs-image .'
+                script {
+                    def timestamp = new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone('UTC'))
+                    env.IMAGE_TAG_NODEJS = "my-nodejs-image:${timestamp}"
                 }
+                dir('node') {
+                    sh "docker build -t ${env.IMAGE_TAG_NODEJS} ."
+                }
+            }
+        }
+
+        stage('Update .env file') {
+            steps {
+                echo 'Updating .env file...'
+                sh 'rm -f .env'
+                sh "echo NGINX_IMG=${env.IMAGE_TAG_NGINX} >> .env"
+                sh "echo NODEJS_IMG=${env.IMAGE_TAG_NODEJS} >> .env"
             }
         }
 
@@ -34,6 +51,9 @@ pipeline {
                 sh 'docker-compose down'
                 echo 'Deploying with Docker Compose...'
                 sh 'docker-compose up -d'
+                
+                echo 'Cleaning up old images...'
+                sh 'docker image prune -f --all --filter "until=24h"'
             }
         }
     }
