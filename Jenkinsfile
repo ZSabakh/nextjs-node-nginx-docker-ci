@@ -27,7 +27,7 @@ pipeline {
             steps {
                 dir('node'){
                         sh 'docker build -f dockerfile.test -t node-test-image:test .'
-                        sh 'docker run --name node-test-container node-test-image:test'
+                        sh 'docker run --rm --name node-test-container node-test-image:test'
                     }
                 post {
                     always {
@@ -35,7 +35,7 @@ pipeline {
                         sh 'docker rmi node-test-image:test'
                     }
                 }
-        }
+            }
         }
 
         stage('Build Nodejs Dockerfile') {
