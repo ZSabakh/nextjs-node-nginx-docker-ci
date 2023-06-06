@@ -25,7 +25,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'docker build -f Dockerfile.test -t node-test-image:test .'
+                sh 'docker build -f dockerfile.test -t node-test-image:test .'
                 sh 'docker run --name node-test-container node-test-image:test'
             }
             post {
