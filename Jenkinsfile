@@ -29,12 +29,6 @@ pipeline {
                         sh 'docker build -f dockerfile.test -t node-test-image:test .'
                         sh 'docker run --rm --name node-test-container node-test-image:test'
                     }
-                post {
-                    always {
-                        sh 'docker rm -f node-test-container'
-                        sh 'docker rmi node-test-image:test'
-                    }
-                }
             }
         }
 
