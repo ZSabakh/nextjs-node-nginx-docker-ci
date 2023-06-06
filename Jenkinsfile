@@ -53,7 +53,7 @@ pipeline {
                 sh 'docker-compose up -d'
                 
                 echo 'Cleaning up old images...'
-                sh 'docker image prune -f --all --filter "until=24h"'
+                sh 'docker image prune -f --all --filter "until=1h"'
             }
         }
     }
