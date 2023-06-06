@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.status(200).send({
-    title: "Node API, changed 8:50AM :)",
+    title: "Node API, changed 9:27AM :)",
   });
 });
 
