@@ -10,6 +10,19 @@ pipeline {
             }
         }
 
+        stage('Build nextjs Dockerfile'){
+            steps {
+                echo 'Building nextjs Dockerfile...'
+                    script {
+                    def timestamp = new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone('UTC'))
+                    env.IMAGE_TAG_NEXTJS = "my-nginx-image:${timestamp}"
+                }
+                dir("nextjs"){
+                    sh "docker build -t ${env.IMAGE_TAG_NEXTJS} ."
+                }
+            }
+        }
+
         stage('Build Nginx Dockerfile') {
             steps {
                 echo 'Building Nginx Dockerfile...'

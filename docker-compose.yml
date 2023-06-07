@@ -16,6 +16,21 @@ services:
     env_file:
       - .env
 
+  nextjs:
+    image: ${NEXTJS_IMG}
+    build:
+      context: ./next
+    container_name: nextjs
+    hostname: nextjs
+    ports:
+      - "4000:4000"
+    depends_on:
+      - nodejs
+    networks:
+      - mern-net
+    env_file:
+      - .env
+
   nginx:
     image: ${NGINX_IMG}
     build:
