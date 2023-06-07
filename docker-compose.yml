@@ -7,8 +7,6 @@ services:
       context: ./node
     container_name: nodejs_server
     hostname: nodejsserver
-    ports:
-      - "3000:3000"
     networks:
       - mern-net
     volumes:
@@ -22,8 +20,6 @@ services:
       context: ./nextjs
     container_name: nextjs
     hostname: nextjs
-    ports:
-      - "4000:4000"
     depends_on:
       - nodejs
     networks:
