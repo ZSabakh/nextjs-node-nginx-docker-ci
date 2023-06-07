@@ -15,10 +15,10 @@ pipeline {
                 echo 'Building nextjs Dockerfile...'
                     script {
                     def timestamp = new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone('UTC'))
-                    env.IMAGE_TAG_NEXTJS = "my-nginx-image:${timestamp}"
+                    env.IMAGE_TAG_NEXTJS = "my-nextjs-image:${timestamp}"
                 }
                 dir("nextjs"){
-                    sh "docker build -t ${env.IMAGE_TAG_NEXTJS} ."
+                    sh "docker build -f dockerfile -t ${env.IMAGE_TAG_NEXTJS} ."
                 }
             }
         }
