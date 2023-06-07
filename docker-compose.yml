@@ -19,7 +19,7 @@ services:
   nextjs:
     image: ${NEXTJS_IMG}
     build:
-      context: ./next
+      context: ./nextjs
     container_name: nextjs
     hostname: nextjs
     ports:
