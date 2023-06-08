@@ -18,10 +18,18 @@ export default function TestAPI() {
   return (
     <>
       <h1>Next.js</h1>
-      <div>
+      <div
+        style={{
+          margin: "1rem 0",
+        }}
+      >
         <Card
           sx={{
             minWidth: "30vw",
+            maxWidth: "30vw",
+            "@media (max-width: 600px)": {
+              maxWidth: "100vw",
+            },
           }}
         >
           <CardContent>
@@ -44,7 +52,6 @@ export default function TestAPI() {
         </Card>
         <Box
           sx={{
-            maxWidth: "30vw",
             width: "100%",
             height: "100%",
             bgcolor: "rgba(56, 4, 40, 0.9)",
