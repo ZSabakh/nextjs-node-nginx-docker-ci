@@ -1,13 +1,6 @@
 "use client";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-  Typography,
-  Box,
-} from "@mui/material";
+import { Card, CardContent, CardActions, Button, Typography, Box } from "@mui/material";
 import Typewriter from "typewriter-effect";
 import { useState } from "react";
 import axios from "axios";
@@ -33,7 +26,7 @@ export default function TestAPI() {
               variant="contained"
               onClick={async () => {
                 setText("Loading...");
-                const res = await axios.get("http://localhost/api");
+                const res = await axios.get("http://167.99.7.161/api");
                 console.log(res.data);
                 setText(res.data.text);
               }}
@@ -59,9 +52,7 @@ export default function TestAPI() {
             justifyContent: "flex-start",
           }}
         >
-          <Typography sx={{ color: "#00ff00", marginRight: 0.5 }}>
-            root@nextjs:~$
-          </Typography>
+          <Typography sx={{ color: "#00ff00", marginRight: 0.5 }}>root@nextjs:~$</Typography>
           <Typewriter
             options={{
               strings: [text],
