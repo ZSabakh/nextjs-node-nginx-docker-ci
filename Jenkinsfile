@@ -64,6 +64,7 @@ pipeline {
                 sh 'rm -f .env'
                 sh "echo NGINX_IMG=${env.IMAGE_TAG_NGINX} >> .env"
                 sh "echo NODEJS_IMG=${env.IMAGE_TAG_NODEJS} >> .env"
+                sh "echo NEXTJS_IMG=${env.IMAGE_TAG_NEXTJS} >> .env"
             }
         }
 
